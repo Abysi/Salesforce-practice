@@ -1,0 +1,40 @@
+<apex:page controller="secondPageController" >
+    <apex:form id="form">
+        <apex:pageBlock title="Contacts" id="contacts_list">
+            <apex:pageBlockTable value="{! contacts }" var="ct">
+                <apex:column value="{! ct.LastName }"/>
+                <apex:column value="{! ct.Email }"/>
+            </apex:pageBlockTable>
+            
+             <div align="center">
+                <apex:commandButton value="Previous page" action="{!previous}" rendered="{!IF(counter<=0,false,true)}"         reRender="contacts_list"/>
+                <apex:commandButton value="Next page"     action="{!next}"     rendered="{!IF(counter>=totalSize,false,true)}" reRender="contacts_list"/>
+             </div>
+            
+            <apex:pageBlockSection title="Add Contact">
+                LastName<apex:inputText value="{!LastName}"/>
+                Email<apex:inputText value="{!Email}"/>
+                Phone<apex:inputText value="{!Phone}"/>
+                OtherPhone<apex:inputText value="{!OtherPhone}"/>
+                Fax<apex:inputText value="{!Fax}"/>
+                AssistantName<apex:inputText value="{!AssistantName}"/>
+                AssistantPhone<apex:inputText value="{!AssistantPhone}"/>
+                MobilePhone<apex:inputText value="{!MobilePhone}"/>
+                Tax Country <apex:selectList value="{!selectedCountry2}" multiselect="false" size="1">
+                				<apex:selectOptions value="{!countriesOptions}"/>
+                				<apex:actionSupport event="onchange" rerender="form"></apex:actionSupport>
+                			</apex:selectList>
+                Tax City	<apex:selectList value="{!selectedCountry3}" multiselect="false" size="1">
+                				<apex:selectOptions value="{!cityOptions}"/>
+                				<apex:actionSupport event="onchange" rerender="form"></apex:actionSupport>
+                			</apex:selectList>
+            </apex:pageBlockSection>
+            
+        </apex:pageBlock>
+        
+        <div align="center">
+            <apex:commandButton action="{!Save}" value="Save" reRender="contacts_list" />              
+        </div>
+        
+    </apex:form>
+</apex:page>

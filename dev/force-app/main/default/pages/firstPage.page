@@ -1,0 +1,21 @@
+<apex:page standardController="Contact" extensions="CustomExtension">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockSection >
+                <apex:inputField value="{!Contact.LastName}"/>
+                <apex:inputField value="{!Contact.Email}"/>
+                <apex:inputField value="{!Contact.Phone}"/>
+                <apex:inputField value="{!Contact.OtherPhone}"/>
+                <apex:inputField value="{!Contact.Fax}"/>
+                <apex:inputField value="{!Contact.AssistantName}"/>
+                <apex:inputField value="{!Contact.AssistantPhone}"/>
+                <apex:inputField value="{!Contact.MobilePhone}"/>
+                <apex:inputField value="{!Contact.Tax_country__c}"/>
+                <apex:inputField value="{!Contact.Tax_city__c}"/>
+            </apex:pageBlockSection>
+            <div align="center">
+                <apex:commandButton action="{!mySave}" value="mySave" />              
+            </div>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
