@@ -15,8 +15,15 @@ private class PracticeBatchSchedulerTest {
         Database.executeBatch(pbs);
         Test.stopTest();
         System.assertEquals(0, [SELECT count() FROM Opportunity WHERE StageName='Closed Lost']);
-
-        
+    }
+    @isTest
+    static void ShedulableTest(){
+        String CRON_EXP = '0 00 00 * * ?';
+        Test.startTest();
+        String jobId=System.schedule('SheduledApex', CRON_EXP, new PracticeBatchScheduler());
+        List<Opportunity> opp=[SELECt id From Opportunity WHERE StageName='Closed Lost'];
+        System.assertEquals(0, opp.size(),'Opps exist before job has run');
+        Test.stopTest();
     }
    
 }
