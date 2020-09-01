@@ -2,6 +2,9 @@
 private class PracticeBatchSchedulerTest {
     @TestSetup
     static void makeData(){
+        CustomSettingsForTask__c t=new CustomSettingsForTask__c();
+        t.DaysForTask__c=-1;
+        insert t;
         List<Opportunity> opps=new List<Opportunity>();
         for (Integer i = 0; i < 10; i++) {
             opps.add(new Opportunity(Name='Test'+i,StageName='Prospecting',CloseDate=Date.today()));
@@ -14,7 +17,7 @@ private class PracticeBatchSchedulerTest {
         PracticeBatchScheduler pbs=new PracticeBatchScheduler();
         Database.executeBatch(pbs);
         Test.stopTest();
-        System.assertEquals(0, [SELECT count() FROM Opportunity WHERE StageName='Closed Lost']);
+        System.assertEquals(10, [SELECT count() FROM Opportunity WHERE StageName='Closed Lost']);
     }
     @isTest
     static void ShedulableTest(){
